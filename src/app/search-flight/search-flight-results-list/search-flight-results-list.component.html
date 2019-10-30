@@ -1,0 +1,58 @@
+<div class="card" *ngIf="fLightSearchDetails && fLightSearchDetails.length">
+    <div class="card-header">
+     Search Results for Flights
+    </div>
+  
+    <div class="card-body">
+      <!-- <div class="row">
+        <div class="col-md-2">Filter by:</div>
+        <div class="col-md-4">
+          <input type="text"
+                 [(ngModel)]="listFilter" />
+        </div>
+      </div>
+      <div class="row"
+           *ngIf="listFilter">
+        <div class="col-md-6">
+          <h4>Filtered by: {{listFilter}}</h4>
+        </div>
+      </div> -->
+  
+      <div class="table-responsive">
+        <table class="table mb-0"
+               *ngIf="fLightSearchDetails && fLightSearchDetails.length">
+          <thead>
+            <tr>
+             
+              <th>Airline logo</th>
+              <th>Airline name</th>
+              <th>Outbound flight duration</th>
+              <th>Inbound flight duration</th>
+              <th>Total amount in USD</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let flight of fLightSearchDetails">
+              <td>
+                <img 
+                     [src]="flight.AirlineLogoAddress"
+                     [title]="flight.AirlineName"
+                     >
+              </td>
+              <td>{{ flight.AirlineName }}</td>
+              <td>{{ flight.OutboundFlightsDuration }}</td>
+              <td>{{ flight.InboundFlightsDuration }}</td>
+              <td>{{ flight.TotalAmount | currency:"USD":"symbol":"1.2-2" }}</td> 
+            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  </div>
+
+
+  
+ 

@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { SharedModule } from './shared/shared.module';
+import { SearchFlightResultsListComponent } from './search-flight/search-flight-results-list/search-flight-results-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SearchFlightComponent
+    SearchFlightComponent,
+    SearchFlightResultsListComponent
   ],
   imports: [
     BrowserModule,
