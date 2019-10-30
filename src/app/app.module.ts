@@ -7,19 +7,21 @@ import { HeaderComponent } from './header/header.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { SharedModule } from './shared/shared.module';
 import { SearchFlightResultsListComponent } from './search-flight/search-flight-results-list/search-flight-results-list.component';
+import { SearchFlightModule} from './search-flight/search-flight.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SearchFlightComponent,
-    SearchFlightResultsListComponent
+   // SearchFlightComponent,
+   // SearchFlightResultsListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    SearchFlightModule
   ],
   providers: [],
   bootstrap: [AppComponent]
