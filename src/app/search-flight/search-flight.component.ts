@@ -1,20 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, AbstractControl, ValidatorFn, ValidationErrors, Validators } from '@angular/forms';
+import { Component, OnInit , AfterViewInit, OnDestroy, ViewChildren, ElementRef} from '@angular/core';
+import { FormGroup, FormBuilder, Validators,FormControlName } from '@angular/forms';
 import { FlightSearchResults } from 'src/app/shared/models/flight-search-results';
 import { SearchResultsService } from 'src/app/shared/services/apis/search-flight.service';
+import { GenericValidator } from '../shared/generic-validator';
+import { ValidationService } from '../shared/services/nonapis/validation-messages.service';
+
+import { Observable, fromEvent, merge } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
   styleUrls: ['./search-flight.component.scss']
 })
-export class SearchFlightComponent implements OnInit {
-
+export class SearchFlightComponent implements OnInit,AfterViewInit {
+  @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   public searchFlightsFormGroup: FormGroup;
   searchResultsDisplayData: FlightSearchResults[] = [];
+  displayMessage: { [key: string]: string } = {};
+  private validationMessages: { [key: string]: { [key: string]: string } };
+  private genericValidator: GenericValidator;
 
   constructor( private formBuilder: FormBuilder,
-               private searchResultsService: SearchResultsService) { 
+               private searchResultsService: SearchResultsService,
+               private validationService: ValidationService) { 
     this.createForm();
   }
 
@@ -32,24 +41,40 @@ export class SearchFlightComponent implements OnInit {
        
     });
 
+    this.validationMessages = this.validationService.errors;
+
+    this.genericValidator = new GenericValidator(this.validationMessages);
     
 }
 
   ngOnInit() {
+  
   }
+
+  ngAfterViewInit(): void {
+      const controlBlurs: Observable<any>[] = this.formInputElements
+      .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
+
+   
+    merge(this.searchFlightsFormGroup.valueChanges, ...controlBlurs).pipe(
+      debounceTime(800)
+    ).subscribe(value => {
+      this.displayMessage = this.genericValidator.processMessages(this.searchFlightsFormGroup);
+    });
+  }
+
+ 
 
   searchFlights(): void {
     if (this.searchFlightsFormGroup.valid) {
      
-        const p = this.searchFlightsFormGroup.value;
+        const searchParam = this.searchFlightsFormGroup.value;
 
-       console.log(p);
-
-       this.searchResultsService.getFlightResults().subscribe(
+         this.searchResultsService.getFlightResults(searchParam).subscribe(
          response => {
           this.searchResultsDisplayData = response;
           console.log(this.searchResultsDisplayData);
-         }
+         },(err: any) => console.log(err)
        )
      
     } else {

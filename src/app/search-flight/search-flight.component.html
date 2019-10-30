@@ -10,10 +10,12 @@
                 <label class="col-md-4 col-form-label">Departure airport code: </label>
                 <div class="col-md-8">
                     <input class="form-control" type="text" placeholder=" Departure airport code (required)"
-                        formControlName="departureCode" />
-                    <!-- <span class="invalid-feedback">
-                    {{displayMessage.productName}}
-                  </span> -->
+                        formControlName="departureCode"
+                        [ngClass]="{'is-invalid': displayMessage.departureCode }"  />
+                       
+                        <span class="invalid-feedback">
+                            {{displayMessage.departureCode}}
+                          </span>
                 </div>
             </div>
 
@@ -21,10 +23,11 @@
                 <label class="col-md-4 col-form-label">Arrival airport code: </label>
                 <div class="col-md-8">
                     <input class="form-control" type="text" placeholder=" Arrival airport code (required)"
-                        formControlName="arrivalCode" />
-                    <!-- <span class="invalid-feedback">
-                    {{displayMessage.productName}}
-                  </span> -->
+                        formControlName="arrivalCode"  [ngClass]="{'is-invalid': displayMessage.arrivalCode }"  />
+                       
+                        <span class="invalid-feedback">
+                            {{displayMessage.arrivalCode}}
+                          </span>
                 </div>
             </div>
 
