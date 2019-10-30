@@ -14,7 +14,9 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./search-flight.component.scss']
 })
 export class SearchFlightComponent implements OnInit,AfterViewInit {
+ 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
+  errorMessage: string;
   public searchFlightsFormGroup: FormGroup;
   searchResultsDisplayData: FlightSearchResults[] = [];
   displayMessage: { [key: string]: string } = {};
@@ -36,13 +38,12 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
       arrivalCode:  ['', [Validators.required,
                Validators.minLength(3),
                Validators.maxLength(3)]],
-      departureDate : ['', Validators.required],
-      arrivalDate : ['', Validators.required]
+      departureDate : [''],
+      arrivalDate : ['']
        
     });
 
     this.validationMessages = this.validationService.errors;
-
     this.genericValidator = new GenericValidator(this.validationMessages);
     
 }
@@ -54,7 +55,6 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
       const controlBlurs: Observable<any>[] = this.formInputElements
       .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
-
    
     merge(this.searchFlightsFormGroup.valueChanges, ...controlBlurs).pipe(
       debounceTime(800)
@@ -73,12 +73,12 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
          this.searchResultsService.getFlightResults(searchParam).subscribe(
          response => {
           this.searchResultsDisplayData = response;
-          console.log(this.searchResultsDisplayData);
+        
          },(err: any) => console.log(err)
        )
      
     } else {
-      //this.errorMessage = 'Please correct the validation errors.';
+      this.errorMessage = 'Please correct the validation errors.';
     }
   }
 
