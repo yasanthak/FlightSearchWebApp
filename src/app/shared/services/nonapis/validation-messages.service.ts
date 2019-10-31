@@ -9,12 +9,14 @@ export class ValidationService {
     departureCode: {
         required: 'Departure Code is required.',
         minlength: 'Departure Code at least three characters.',
-        maxlength: 'Departure Code at least three characters.'
+        pattern : 'Depature Code accepts alphanumeric only'
+       
       },
       arrivalCode: {
         required: 'Arrival Code is required.',
         minlength: 'Arrival Code at least three characters.',
-        maxlength: 'Arrival Code at least three characters.'
+        pattern : 'Arrival Code accepts alphanumeric only '
+       
       },
   };
 

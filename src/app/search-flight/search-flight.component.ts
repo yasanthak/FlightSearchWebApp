@@ -32,11 +32,9 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
   private createForm(): void {
     this.searchFlightsFormGroup = this.formBuilder.group({
       departureCode:  ['', [Validators.required,
-              Validators.minLength(3),
-              Validators.maxLength(3)]],
+              Validators.minLength(3),Validators.pattern('^[a-zA-Z0-9]*$')]],
       arrivalCode:  ['', [Validators.required,
-               Validators.minLength(3),
-               Validators.maxLength(3)]],
+               Validators.minLength(3),Validators.pattern('^[a-zA-Z0-9]*$')]],
       departureDate : [''],
       arrivalDate : ['']
        

@@ -9,7 +9,7 @@
             <div class=" row mb-2">
                 <label class="col-md-4 col-form-label">Departure airport code: </label>
                 <div class="col-md-8">
-                    <input class="form-control" type="text" placeholder=" Departure airport code (required)"
+                    <input class="form-control" type="text" placeholder=" Departure airport code (required)" maxlength="3"
                         formControlName="departureCode"
                         [ngClass]="{'is-invalid': displayMessage.departureCode }"  />
                        
@@ -22,7 +22,7 @@
             <div class=" row mb-2">
                 <label class="col-md-4 col-form-label">Arrival airport code: </label>
                 <div class="col-md-8">
-                    <input class="form-control" type="text" placeholder=" Arrival airport code (required)"
+                    <input class="form-control" type="text" placeholder=" Arrival airport code (required)" maxlength="3"
                         formControlName="arrivalCode"  [ngClass]="{'is-invalid': displayMessage.arrivalCode }"  />
                        
                         <span class="invalid-feedback">
