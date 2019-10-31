@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { SearchResultsService } from './search-flight.service';
-import { FlightSearchResults } from 'src/app/shared/models/flight-search-results'
-import { FlightSearchRequest } from 'src/app/shared/models/flight-search-request'
+import { FlightSearchRequest, FlightSearchResults } from 'src/app/shared/models/export';
 
  
 

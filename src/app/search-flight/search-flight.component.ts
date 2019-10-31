@@ -1,4 +1,4 @@
-import { Component, OnInit , AfterViewInit, OnDestroy, ViewChildren, ElementRef} from '@angular/core';
+import { Component, OnInit , AfterViewInit, ViewChildren, ElementRef} from '@angular/core';
 import { FormGroup, FormBuilder, Validators,FormControlName } from '@angular/forms';
 import { FlightSearchResults } from 'src/app/shared/models/flight-search-results';
 import { SearchResultsService } from 'src/app/shared/services/apis/search-flight.service';
@@ -16,7 +16,6 @@ import { debounceTime } from 'rxjs/operators';
 export class SearchFlightComponent implements OnInit,AfterViewInit {
  
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-  errorMessage: string;
   public searchFlightsFormGroup: FormGroup;
   searchResultsDisplayData: FlightSearchResults[] = [];
   displayMessage: { [key: string]: string } = {};
@@ -78,9 +77,7 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
          },(err: any) => console.log(err)
        )
      
-    } else {
-      this.errorMessage = 'Please correct the validation errors.';
-    }
+    } 
   }
 
 }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { FlightSearchRequest, FlightSearchResults } from 'src/app/shared/models/export';
 
-import { FlightSearchResults } from 'src/app/shared/models/flight-search-results'
-import { FlightSearchRequest } from 'src/app/shared/models/flight-search-request'
 
 
 @Injectable({

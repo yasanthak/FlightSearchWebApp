@@ -10,6 +10,7 @@ import { FlightSearchResults } from 'src/app/shared/models/flight-search-results
 })
 export class SearchFlightResultsListComponent implements OnInit {
 
+  flightResultsAvailable = false;
   dispalaySearchResults : FlightSearchResults[];
   @Input() fLightSearchDetails: FlightSearchResults[];
   public searchResultsFormGroup: FormGroup;
@@ -39,8 +40,7 @@ export class SearchFlightResultsListComponent implements OnInit {
       } else {
          this.fLightSearchDetails = this.dispalaySearchResults;
       }
-     
-   
+      
      
     });
 
@@ -48,8 +48,10 @@ export class SearchFlightResultsListComponent implements OnInit {
 
   serachResultsFilter(filterBy: string) {
  
-   return this.fLightSearchDetails =  this.dispalaySearchResults.filter(flight  =>  
+    this.fLightSearchDetails =  this.dispalaySearchResults.filter(flight  =>  
      flight.AirlineName.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1);
+     this.flightResultsAvailable = true;
+     return this.fLightSearchDetails;
    
   }
 
