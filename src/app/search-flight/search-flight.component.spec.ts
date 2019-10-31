@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed ,inject } from '@angular/core/testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -6,10 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchFlightComponent } from './search-flight.component';
 import { SearchFlightResultsListComponent } from './search-flight-results-list/search-flight-results-list.component';
 import { SearchResultsService } from 'src/app/shared/services/apis/search-flight.service';
+import { FlightSearchResults } from '../shared/models/export';
+import { of } from 'rxjs';
 
 describe('SearchFlightComponent', () => {
   let component: SearchFlightComponent;
   let fixture: ComponentFixture<SearchFlightComponent>;
+  let searchResultsService : SearchResultsService;
 
   const formBuilder: FormBuilder = new FormBuilder();
 
@@ -29,7 +32,8 @@ describe('SearchFlightComponent', () => {
       .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(inject([SearchResultsService], s => {
+    searchResultsService = s;
     fixture = TestBed.createComponent(SearchFlightComponent);
     component = fixture.componentInstance;
 
@@ -41,9 +45,22 @@ describe('SearchFlightComponent', () => {
     });
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("should call searchFlights and return list of Flights Results", async(() => {
+    const response: FlightSearchResults[] = [];
+  
+    spyOn(searchResultsService, 'getFlightResults').and.returnValue(of(response))
+  
+    component.searchFlights();
+  
+    fixture.detectChanges();
+  
+    expect(component.searchResultsDisplayData).toEqual(response);
+  }));
+
 });
