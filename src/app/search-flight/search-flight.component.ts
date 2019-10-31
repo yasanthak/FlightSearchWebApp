@@ -73,6 +73,7 @@ export class SearchFlightComponent implements OnInit,AfterViewInit {
          this.searchResultsService.getFlightResults(searchParam).subscribe(
          response => {
           this.searchResultsDisplayData = response;
+          this.searchFlightsFormGroup.reset();
         
          },(err: any) => console.log(err)
        )
