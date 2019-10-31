@@ -14,22 +14,22 @@ describe('SearchResultsService Tests', () => {
   
     let testSearchResults: FlightSearchResults[] = [
         {
-          airlineLogoAddress: "http://nmflightapi.azurewebsites.net/Images/AirlineLogo/CZ.gif",
-          airlineName: "China Southern Airlines",
-          inboundFlightsDuration: "24:10",
-          itineraryId: 1,
-          outboundFlightsDuration: "26:20",
-          stops: 2,
-          totalAmount: "2903.84"
+          AirlineLogoAddress: "http://nmflightapi.azurewebsites.net/Images/AirlineLogo/CZ.gif",
+          AirlineName: "China Southern Airlines",
+          InboundFlightsDuration: "24:10",
+          ItineraryId: 1,
+          OutboundFlightsDuration: "26:20",
+          Stops: 2,
+          TotalAmount: "2903.84"
         },
         {
-          airlineLogoAddress: "http://nmflightapi.azurewebsites.net/Images/AirlineLogo/EK.gif",
-          airlineName: "Emirates Airline",
-          inboundFlightsDuration: "42:55",
-          itineraryId: 2,
-          outboundFlightsDuration: "25:40",
-          stops: 2,
-          totalAmount: "2954.14"
+          AirlineLogoAddress: "http://nmflightapi.azurewebsites.net/Images/AirlineLogo/EK.gif",
+          AirlineName: "Emirates Airline",
+          InboundFlightsDuration: "42:55",
+          ItineraryId: 2,
+          OutboundFlightsDuration: "25:40",
+          Stops: 2,
+          TotalAmount: "2954.14"
         }
       ]
 

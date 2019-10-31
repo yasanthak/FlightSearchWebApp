@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import { FlightSearchResults } from 'src/app/shared/models/flight-search-results';
 
 @Component({
@@ -9,7 +10,7 @@ import { FlightSearchResults } from 'src/app/shared/models/flight-search-results
 })
 export class SearchFlightResultsListComponent implements OnInit {
 
- 
+  dispalaySearchResults : FlightSearchResults[];
   @Input() fLightSearchDetails: FlightSearchResults[];
   public searchResultsFormGroup: FormGroup;
   public filterValue = '';
@@ -26,10 +27,17 @@ export class SearchFlightResultsListComponent implements OnInit {
   ngOnInit() {
 
     
-    this.searchResultsFormGroup.controls['filterResults'].valueChanges.subscribe(value => {
+    
+    this.searchResultsFormGroup.controls['filterResults'].valueChanges
+    .pipe(
+      debounceTime(800)
+      ).subscribe(value => {
       if(value !== '') {
         this.filterValue = value;
-       // this.serachResultsFilter(this.filterValue);
+        this.dispalaySearchResults =  [...this.fLightSearchDetails]; 
+        this.serachResultsFilter(this.filterValue);
+      } else {
+         this.fLightSearchDetails = this.dispalaySearchResults;
       }
      
    
@@ -39,13 +47,9 @@ export class SearchFlightResultsListComponent implements OnInit {
   }
 
   serachResultsFilter(filterBy: string) {
-
-    this.fLightSearchDetails =  this.fLightSearchDetails.filter(flight => {
-     flight.airlineName.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1;
-    
-    })
-    
-    return this.fLightSearchDetails;
+ 
+   return this.fLightSearchDetails =  this.dispalaySearchResults.filter(flight  =>  
+     flight.AirlineName.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1);
    
   }
 
