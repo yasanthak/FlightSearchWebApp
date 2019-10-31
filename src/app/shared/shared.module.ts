@@ -9,7 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule, 
     ReactiveFormsModule,
-    NgbModule,
+    NgbModule
+    
   ],
   declarations: [
    
@@ -20,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule, 
     ReactiveFormsModule,
     NgbModule
+    
   ]
 })
 export class SharedModule { }
